@@ -198,6 +198,9 @@ class WNSToast(WNSBase):
 
     def prepare_payload(self, payload):
         root = ET.Element("toast")
+        if 'silent' in payload:
+            audio = ET.SubElement(root, 'audio')
+            audio.attrib['silent'] = 'true'
         visual = ET.SubElement(root, 'visual')
         binding = ET.SubElement(visual, 'binding')
         binding.attrib['template'] = payload['template']
